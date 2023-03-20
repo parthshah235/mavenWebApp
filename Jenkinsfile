@@ -29,10 +29,11 @@ pipeline {
             }
         }
         stage('Deploy'){
+            stage('Deploy'){
             steps {
-                powershell 'if (docker ps -a | where { $_.Name -eq "maven-webapp" }) { docker stop maven-webapp }'
-                powershell 'if (docker ps -a | where { $_.Name -eq "maven-webapp" }) { docker rm maven-webapp }'
-                powershell 'docker run -d -p 8080:8080 --name maven-webapp parthshah230/maven-webapp:$TAG'
+                bat 'if (docker ps -a | findstr /i "maven-webapp") ( docker stop maven-webapp )'
+                bat 'if (docker ps -a | findstr /i "maven-webapp") ( docker rm maven-webapp )'
+                bat 'docker run -d -p 8080:8080 --name maven-webapp parthshah230/maven-webapp:%TAG%'
             }
         }
     }
