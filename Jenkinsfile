@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    
+    environment {
+        DATE = new Date().format('yy.M')
+        TAG = "${DATE}.${BUILD_NUMBER}"
+    }
     stages {
         stage('Build') {
             steps {
@@ -11,7 +14,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build("parthshah230/hello-world")
+                    docker.build("parthshah230/mavenWebApp:${TAG}")
                 }
             }
         }
@@ -19,17 +22,17 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', '7df15b48-86ac-42c4-9bdf-aaf180d3c872') {
-                        docker.image("parthshah230/hello-world").push()
-                        docker.image("parthshah230/hello-world").push("latest")
+                        docker.image("parthshah230/mavenWebApp:${TAG}").push()
+                        docker.image("parthshah230/hello-world:${TAG}").push("latest")
                     }
                 }
             }
         }
         stage('Deploy'){
             steps {
-                bat "docker stop hello-world | true"
-                bat "docker rm hello-world | true"
-                bat "docker run --name hello-world -d -p 9004:8080 parthshah230/hello-world"
+                bat "docker stop mavenWebApp | true"
+                bat "docker rm mavenWebApp | true"
+                bat "docker run --name mavenWebApp -d -p 9004:8080 parthshah230/mavenWebApp:${TAG}"
             }
         }
     }
