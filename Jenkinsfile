@@ -30,9 +30,10 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                bat 'if (docker ps -a | findstr /i "maven-webapp") ( docker stop maven-webapp )'
-                bat 'if (docker ps -a | findstr /i "maven-webapp") ( docker rm maven-webapp )'
-                bat 'docker run -d -p 8080:8080 --name maven-webapp parthshah230/maven-webapp:%TAG%'
+                bat "docker stop hello-world | true"
+                bat "docker rm hello-world | true"
+                bat "docker run --name hello-world -d -p 9004:8080 parthshah230/hello-world:${TAG}"
+            }
         }
     }
 }
