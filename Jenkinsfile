@@ -30,8 +30,8 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                bat "docker stop hello-world | true"
-                bat "docker rm hello-world | true"
+                bat "docker stop hello-world -force"
+                bat "docker rm hello-world -force"
                 bat "docker run --name hello-world -d -p 9004:8080 parthshah230/hello-world:${TAG}"
             }
         }
