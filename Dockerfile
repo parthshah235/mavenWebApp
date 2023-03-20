@@ -4,6 +4,9 @@ FROM openjdk:8-jdk-alpine
 # Set the working directory to /app
 WORKDIR /app
 
+# Install Maven
+RUN apk add --no-cache maven
+
 # Copy the pom.xml file to the container
 COPY pom.xml .
 
@@ -19,5 +22,7 @@ RUN ["mvn", "clean", "package"]
 # Expose port 8080
 EXPOSE 8080
 
+# Start the Java webapp
+CMD ["java", "-jar", "target/my-webapp-1.
 # Start the Java webapp
 CMD ["java", "-jar", "target/my-webapp-1.0-SNAPSHOT.war"]
