@@ -8,13 +8,13 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download the maven dependencies
-bat mvn dependency:go-offline
+RUN mvn dependency:go-offline
 
 # Copy the source code to the container
 COPY src/ ./src/
 
 # Compile and package the Java webapp
-bat mvn clean package
+RUN mvn clean package
 
 # Expose port 8080
 EXPOSE 8080
