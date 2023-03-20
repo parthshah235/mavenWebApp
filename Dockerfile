@@ -25,4 +25,4 @@ EXPOSE 8080
 # Start the Java webapp
 CMD ["java", "-jar", "target/my-webapp-1.
 # Start the Java webapp
-CMD ["java", "-jar", "target/my-webapp-1.0-SNAPSHOT.war"]
+CMD ["java", "-jar", "target/my-webapp-1.0-SNAPSHOT.jar"]
