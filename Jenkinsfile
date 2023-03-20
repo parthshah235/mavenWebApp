@@ -30,9 +30,9 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                bat "docker stop hello-world -force"
-                bat "docker rm hello-world -force"
-                bat "docker run --name hello-world -d -p 9004:8080 parthshah230/hello-world:${TAG}"
+                bat "docker stop maven-webapp -force"
+                bat "docker rm maven-webapp -force"
+                bat "docker run --name maven-webapp -d -p 9004:8080 parthshah230/maven-webapp:${TAG}"
             }
         }
     }
