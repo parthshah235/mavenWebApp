@@ -8,17 +8,16 @@ WORKDIR /app
 COPY pom.xml .
 
 # Download the maven dependencies
-RUN mvnw dependency:resolve
+RUN ["mvn", "dependency:go-offline"]
 
 # Copy the source code to the container
 COPY src/ ./src/
 
 # Compile and package the Java webapp
-RUN mvnw clean package
+RUN ["mvn", "clean", "package"]
 
 # Expose port 8080
 EXPOSE 8080
 
 # Start the Java webapp
 CMD ["java", "-jar", "target/my-webapp-1.0-SNAPSHOT.war"]
-
