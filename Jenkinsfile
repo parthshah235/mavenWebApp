@@ -30,9 +30,9 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                bat 'IF EXIST maven-webapp (docker stop maven-webapp)'
-                bat 'IF EXIST maven-webapp (docker rm maven-webapp)'
-                bat 'docker run -d -p 8080:8080 --name maven-webapp parthshah230/maven-webapp:${TAG}'
+                powershell 'if (docker ps -a | where { $_.Name -eq "maven-webapp" }) { docker stop maven-webapp }'
+                powershell 'if (docker ps -a | where { $_.Name -eq "maven-webapp" }) { docker rm maven-webapp }'
+                powershell 'docker run -d -p 8080:8080 --name maven-webapp parthshah230/maven-webapp:$TAG'
             }
         }
     }
