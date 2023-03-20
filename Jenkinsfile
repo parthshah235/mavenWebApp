@@ -28,12 +28,5 @@ pipeline {
                 }
             }
         }
-        stage('Deploy'){
-            steps {
-                bat "docker stop maven-webapp || true"
-                bat "docker rm maven-webapp || true"
-                bat "docker run --name maven-webapp -d -p 9004:8080 parthshah230/maven-webapp:${TAG}"
-            }
-        }
     }
 }
