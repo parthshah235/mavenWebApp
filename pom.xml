@@ -30,7 +30,7 @@
             <archive>
              <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.example.MyMainClass</mainClass>
+              <mainClass>com.example.my-webapp</mainClass>
             </manifest>
           </archive>
          </configuration>
