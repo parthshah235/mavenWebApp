@@ -23,4 +23,4 @@ RUN ["mvn", "clean", "package"]
 EXPOSE 8080
 
 # Start the Java webapp
-CMD ["java", "-jar", "target/my-webapp-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/my-webapp-1.0-SNAPSHOT.war"]
